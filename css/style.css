@@ -139,8 +139,8 @@ nav.contact-icons a:hover {
     display: flex;
     justify-content: center;
     margin-bottom: 1.5rem;
-    flex-wrap: wrap; /* Adicionado para quebrar linha em telas pequenas */
-    gap: 1rem; /* Adicionado para espaçamento */
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .hero-buttons a {
@@ -542,20 +542,25 @@ footer {
         border-radius: 12px;
     }
 
+    /* Modificado para remover o scroll horizontal */
     .experiencias-menu {
         width: 100%;
-        flex-direction: row;
-        justify-content: flex-start;
-        overflow-x: auto;
-        white-space: nowrap;
+        flex-direction: column; /* Agora em coluna */
+        justify-content: center;
         border-bottom: 1px solid #222;
-        padding: 1rem;
+        padding: 1rem 0;
         border-radius: 12px 12px 0 0;
     }
-
+    /* Adicionado para que os botões do menu ocupem 100% da largura em mobile */
     .experiencias-menu button {
-        padding: 0.5rem 1.5rem;
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem 1.5rem;
         font-size: 0.9rem;
+        border-bottom: 1px solid #1a1a1a;
+    }
+    .experiencias-menu button:last-child {
+        border-bottom: none;
     }
 
     .experiencias-menu button.active::before {
@@ -563,9 +568,10 @@ footer {
     }
 
     .experiencias-menu button.active {
-        border-bottom: 2px solid #00bfff;
+        background-color: #1a1a1a;
+        color: #aee4ff;
     }
-
+    
     .experiencias-content {
         padding: 1.5rem;
     }
