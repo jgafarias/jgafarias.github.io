@@ -74,18 +74,6 @@ nav.contact-icons a:hover {
     transform: translateY(-5px);
 }
 
-@media (max-width: 768px) {
-    header {
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-    .logo {
-        width: 100%;
-        text-align: center;
-    }
-}
-
 /* Menu de Navegação Lateral (Paginação) */
 .page-navigation {
     position: fixed;
@@ -113,12 +101,6 @@ nav.contact-icons a:hover {
 
 .page-navigation a.active {
     background-color: #00bfff;
-}
-
-@media (max-width: 768px) {
-    .page-navigation {
-        display: none;
-    }
 }
 
 /* Seção Hero */
@@ -157,13 +139,14 @@ nav.contact-icons a:hover {
     display: flex;
     justify-content: center;
     margin-bottom: 1.5rem;
+    flex-wrap: wrap; /* Adicionado para quebrar linha em telas pequenas */
+    gap: 1rem; /* Adicionado para espaçamento */
 }
 
 .hero-buttons a {
     padding: 0.8rem 1.8rem;
     border: 2px solid #00bfff;
     border-radius: 8px;
-    margin: 0 1rem;
     color: #00bfff;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -237,7 +220,6 @@ nav.contact-icons a:hover {
     font-size: 0.8rem;
 }
 
-/* Estilos para o link do GitHub */
 .project-github-container {
     display: flex;
     justify-content: center;
@@ -329,7 +311,6 @@ nav.contact-icons a:hover {
     flex-direction: column;
 }
 
-/* Sub-menu vertical de "Trabalhos" e "Cursos" */
 .experiencias-container {
     display: flex;
     width: 100%;
@@ -471,13 +452,6 @@ nav.contact-icons a:hover {
     line-height: 1.8;
 }
 
-@media (max-width: 992px) {
-    .sobre-container {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
 /* Rodapé */
 footer {
     text-align: center;
@@ -485,4 +459,146 @@ footer {
     background: #111;
     color: #888;
     font-size: 0.9rem;
+}
+
+/*--- Media Queries para Responsividade ---*/
+
+@media (max-width: 1200px) {
+    #experiencias h2,
+    .tabs-container {
+        padding: 0 2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .sobre-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .sobre-container p {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1.5rem 5%;
+    }
+    .logo {
+        width: 100%;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    nav.contact-icons {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    section {
+        padding: 4rem 5%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .projects {
+        grid-template-columns: 1fr;
+    }
+
+    #experiencias {
+        padding-top: 6rem;
+    }
+    
+    #experiencias h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .tabs-menu {
+        flex-direction: column;
+        gap: 1rem;
+        border-bottom: none;
+    }
+
+    .tabs-menu .tab-btn.active::after {
+        content: none;
+    }
+
+    .tabs-menu .tab-btn.active {
+        border-bottom: 2px solid #00bfff;
+    }
+
+    .experiencias-container {
+        flex-direction: column;
+        border-radius: 12px;
+    }
+
+    .experiencias-menu {
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        border-bottom: 1px solid #222;
+        padding: 1rem;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .experiencias-menu button {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .experiencias-menu button.active::before {
+        content: none;
+    }
+
+    .experiencias-menu button.active {
+        border-bottom: 2px solid #00bfff;
+    }
+
+    .experiencias-content {
+        padding: 1.5rem;
+    }
+
+    .sobre-container img {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .page-navigation {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    #projetos h2,
+    #experiencias h2,
+    #sobre h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
