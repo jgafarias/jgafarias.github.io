@@ -4,7 +4,7 @@
 
 window.PATCH_CONFIG = {
   defaultTitle: "Patch notes",  // título usado quando a versão não define 'title'
-  downloadUrl: "https://pokekarion.com/patchNotes/update/client.zip"  // URL de download da atualização (Google Drive ou site direto)
+  downloadUrl: "https://drive.google.com/file/d/1y5Y2xNxR1oG7jLRlPsXxKu8RoOcMavxa/view?usp=sharing"  // URL de download da atualização (Google Drive ou site direto)
 };
 
 window.PATCH_NOTES = [
