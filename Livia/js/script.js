@@ -21,6 +21,7 @@ if (modal) {
     const formStep = modal.querySelector('.modal-form');
     const qrStep = modal.querySelector('.modal-qr');
     const closeTargets = modal.querySelectorAll('[data-close]');
+    const thanksText = modal.querySelector('.thanks-text');
 
     const openModal = (value) => {
         giftValue.textContent = `R$ ${value}`;
@@ -48,6 +49,51 @@ if (modal) {
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        const now = new Date();
+        const date = now.toISOString().slice(0, 10);
+        const valorText = String(giftValue?.textContent ?? '');
+        const valor = valorText.replace(/[^\d]/g, '');
+
+        const record = {
+            nome: String(data.nome ?? '').trim(),
+            telefone: String(data.telefone ?? '').trim(),
+            valor: valor.trim(),
+            mensagem: String(data.mensagem ?? '').trim(),
+            data: date,
+        };
+
+        const pendingMessage = 'Registrando sua mensagem...';
+        const okMessage = 'Mensagem registrada. Muito obrigada pelo carinho.';
+        const okMessageNoImage = 'Mensagem registrada, mas a imagem nao foi gerada.';
+        const errorMessage = 'Nao foi possivel registrar a mensagem. Tente novamente.';
+
+        if (thanksText) {
+            thanksText.textContent = pendingMessage;
+        }
+
+        fetch('/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(record)
+        }).then((response) => {
+            if (!response.ok) {
+                throw new Error('api_error');
+            }
+            return response.json().catch(() => null);
+        }).then((payload) => {
+            const generated = payload && Object.prototype.hasOwnProperty.call(payload, 'generated') ? Boolean(payload.generated) : true;
+            if (thanksText) {
+                thanksText.textContent = generated ? okMessage : okMessageNoImage;
+            }
+        }).catch(() => {
+            if (thanksText) {
+                thanksText.textContent = errorMessage;
+            }
+        });
+
         formStep.classList.remove('is-active');
         qrStep.classList.add('is-active');
     });
