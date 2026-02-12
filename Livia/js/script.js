@@ -1,4 +1,4 @@
-setTimeout (() => {
+setTimeout(() => {
     document.getElementById('loading').style.display = 'none';
 }, 3500);
 
@@ -12,7 +12,62 @@ window.addEventListener('scroll', () => {
 
 document.body.classList.remove('loading');
 
-const giftCards = document.querySelectorAll('.gift-card');
+// Carousel functionality
+const carouselTrack = document.querySelector('.carousel-track');
+const carouselSlides = document.querySelectorAll('.carousel-slide');
+const prevBtn = document.querySelector('.carousel-btn.prev');
+const nextBtn = document.querySelector('.carousel-btn.next');
+const dots = document.querySelectorAll('.carousel-indicators .dot');
+
+if (carouselTrack && carouselSlides.length > 0) {
+    let currentSlide = 0;
+    const totalSlides = carouselSlides.length;
+
+    const updateCarousel = () => {
+        // Move track
+        const slideWidth = carouselSlides[0].offsetWidth;
+        carouselTrack.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+
+        // Update active states
+        carouselSlides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentSlide);
+        });
+
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    };
+
+    const nextSlide = () => {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
+    };
+
+    const prevSlide = () => {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    };
+
+    // Event listeners
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            updateCarousel();
+        });
+    });
+
+    // Auto-play (optional)
+    setInterval(nextSlide, 5000);
+
+    // Initialize
+    updateCarousel();
+}
+
+
+const giftCards = document.querySelectorAll('.gift-option');
 const modal = document.getElementById('giftModal');
 
 if (modal) {
@@ -50,52 +105,39 @@ if (modal) {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+
+        // 1. Loading State
+        submitBtn.textContent = 'Gerando Pix...';
+        submitBtn.disabled = true;
+
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        const now = new Date();
-        const date = now.toISOString().slice(0, 10);
         const valorText = String(giftValue?.textContent ?? '');
-        const valor = valorText.replace(/[^\d]/g, '');
+        // Clean value for display/logic
+        const valorClean = valorText.replace(/[^\d,]/g, '');
 
-        const record = {
-            nome: String(data.nome ?? '').trim(),
-            telefone: String(data.telefone ?? '').trim(),
-            valor: valor.trim(),
-            mensagem: String(data.mensagem ?? '').trim(),
-            data: date,
-        };
+        // Simulate API delay for better UX
+        setTimeout(() => {
+            // 2. Generate Real-looking QR (using placeholder API with value)
+            const qrData = `00020126360014BR.GOV.BCB.PIX0114+5511999999999520400005303986540${valorClean.replace(',', '.')}`; // Mock Pix String
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(qrData)}`;
 
-        const pendingMessage = 'Registrando sua mensagem...';
-        const okMessage = 'Mensagem registrada. Muito obrigada pelo carinho.';
-        const okMessageNoImage = 'Mensagem registrada, mas a imagem nao foi gerada.';
-        const errorMessage = 'Nao foi possivel registrar a mensagem. Tente novamente.';
-
-        if (thanksText) {
-            thanksText.textContent = pendingMessage;
-        }
-
-        fetch('/api/messages', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(record)
-        }).then((response) => {
-            if (!response.ok) {
-                throw new Error('api_error');
+            const qrContainer = modal.querySelector('.qr-placeholder');
+            if (qrContainer) {
+                qrContainer.innerHTML = `<img src="${qrUrl}" alt="QR Code Pix" style="border-radius: 8px;">`;
+                qrContainer.style.background = 'white'; // Clean background for image
             }
-            return response.json().catch(() => null);
-        }).then((payload) => {
-            const generated = payload && Object.prototype.hasOwnProperty.call(payload, 'generated') ? Boolean(payload.generated) : true;
-            if (thanksText) {
-                thanksText.textContent = generated ? okMessage : okMessageNoImage;
-            }
-        }).catch(() => {
-            if (thanksText) {
-                thanksText.textContent = errorMessage;
-            }
-        });
 
-        formStep.classList.remove('is-active');
-        qrStep.classList.add('is-active');
+            // 3. Swap Steps "After" processing
+            formStep.classList.remove('is-active');
+            qrStep.classList.add('is-active');
+
+            // Reset Form State
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        }, 1500);
     });
 
     window.addEventListener('keydown', (event) => {
