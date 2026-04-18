@@ -209,7 +209,8 @@
     </div>
 
     <!-- RSVP MODAL -->
-    <div class="modal" id="rsvpModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rsvpModalTitle">
+    <div class="modal" id="rsvpModal" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="rsvpModalTitle">
         <div class="modal-backdrop" id="rsvpBackdrop"></div>
         <div class="rsvp-modal-card">
             <button class="modal-close" type="button" id="rsvpModalClose" aria-label="Fechar">×</button>
@@ -221,7 +222,9 @@
                     <h3 id="rsvpModalTitle">Confirmar Presença</h3>
                     <p>Sua presença é muito importante para nós!</p>
                 </div>
-                <form id="rsvpForm" class="rsvp-form" action="https://script.google.com/macros/s/AKfycbxRaPV9HjICjm9DcJ8KzpIDRH4VljkfV0T4kOHc2edwxSrDz-VS7TbWq9rBkvCx_Db4/exec" method="GET" target="rsvp-iframe">
+                <form id="rsvpForm" class="rsvp-form"
+                    action="https://script.google.com/macros/s/AKfycby_QbQEc_HAfuTjNs8pirIV3AjOnxGqY37P6Q9jElm0onXP7UBEYvM8z5XmWmQWhtq8/exec"
+                    method="GET" target="rsvp-iframe">
                     <!-- Campos enviados via EmailJS para o Gmail cadastrado -->
                     <label for="rsvp-nome">
                         Nome Completo
@@ -231,7 +234,8 @@
                         Quantas pessoas irão com você?
                         <div class="guest-counter">
                             <button type="button" class="counter-btn" id="btnMinus" aria-label="Diminuir">−</button>
-                            <input type="number" id="rsvp-acompanhantes" name="acompanhantes" value="0" min="0" max="10" readonly>
+                            <input type="number" id="rsvp-acompanhantes" name="acompanhantes" value="0" min="0" max="10"
+                                readonly>
                             <button type="button" class="counter-btn" id="btnPlus" aria-label="Aumentar">+</button>
                         </div>
                         <span class="counter-hint">Além de você</span>
