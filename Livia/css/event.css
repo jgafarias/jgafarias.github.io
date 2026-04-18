@@ -1,0 +1,155 @@
+/* ========================================
+   EVENTO — Cards de detalhes + Botão RSVP
+   ======================================== */
+
+.event,
+.gifts {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.event-grid.details-card-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem;
+}
+
+.detail-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow:
+        0 10px 40px rgba(31, 95, 134, 0.08),
+        0 0 0 1px rgba(31, 95, 134, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(31, 95, 134, 0.03) 0%, rgba(42, 123, 168, 0.03) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.detail-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 20px 60px rgba(31, 95, 134, 0.15),
+        0 0 0 1px rgba(31, 95, 134, 0.08);
+}
+
+.detail-card:hover::before { opacity: 1; }
+
+.detail-card .icon-circle {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(31, 95, 134, 0.1) 0%, rgba(42, 123, 168, 0.1) 100%);
+    position: relative;
+}
+
+.detail-card h3 {
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.detail-card p {
+    color: #596a7d;
+    font-size: 1.1rem;
+}
+
+.btn-text {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: linear-gradient(90deg, #d4af6a 0%, #c5a059 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    position: relative;
+    padding-bottom: 3px;
+}
+
+.btn-text::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #d4af6a 0%, #c5a059 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-text:hover::after { transform: scaleX(1); }
+
+/* Área do botão RSVP */
+.rsvp-area {
+    margin-top: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.rsvp-open-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.1rem 2.8rem;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(31, 95, 134, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.rsvp-open-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.12);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.rsvp-open-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(31, 95, 134, 0.42);
+}
+
+.rsvp-open-btn:hover::before { opacity: 1; }
+.rsvp-open-btn:active         { transform: translateY(-1px); }
+
+.rsvp-btn-icon { font-size: 1.2rem; }

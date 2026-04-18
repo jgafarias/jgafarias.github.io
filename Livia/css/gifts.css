@@ -1,0 +1,343 @@
+/* ========================================
+   PRESENTES — Gift Cards + Gift Modal (Pix)
+   ======================================== */
+
+.gifts-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+}
+
+.gifts-info h2 {
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 2rem;
+}
+
+.gifts-message p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #596a7d;
+    font-size: 1.05rem;
+}
+
+.gifts-message .highlight-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    background: linear-gradient(90deg, #a3527b 0%, #c5a059 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.15rem;
+}
+
+.gift-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.gift-option {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow:
+        0 10px 40px rgba(31, 95, 134, 0.08),
+        0 0 0 1px rgba(31, 95, 134, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.gift-option::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(31, 95, 134, 0.03) 0%, rgba(42, 123, 168, 0.03) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 20px;
+}
+
+.gift-option:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 20px 60px rgba(31, 95, 134, 0.15),
+        0 0 0 1px rgba(31, 95, 134, 0.08);
+    border-color: rgba(31, 95, 134, 0.1);
+}
+
+.gift-option:hover::before { opacity: 1; }
+
+.gift-option.featured {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+        linear-gradient(135deg, #d4af6a 0%, #c5a059 100%) border-box;
+    animation: featuredPulse 3s ease-in-out infinite;
+}
+
+@keyframes featuredPulse {
+    0%, 100% {
+        box-shadow:
+            0 10px 40px rgba(197, 160, 89, 0.15),
+            0 0 30px rgba(197, 160, 89, 0.1);
+    }
+    50% {
+        box-shadow:
+            0 15px 50px rgba(197, 160, 89, 0.25),
+            0 0 40px rgba(197, 160, 89, 0.2);
+    }
+}
+
+.gift-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    color: white;
+    background: linear-gradient(135deg, #2a7ba8 0%, #1f5f86 100%);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(31, 95, 134, 0.25);
+}
+
+.gift-amount {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 3rem;
+    display: block;
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.gift-desc {
+    color: #889bad;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.gift-action {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    color: white;
+    border-radius: 12px;
+    margin-top: auto;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: none;
+    box-shadow: 0 6px 25px rgba(31, 95, 134, 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.gift-action::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.gift-option:hover .gift-action            { transform: translateY(-2px); box-shadow: 0 10px 35px rgba(31, 95, 134, 0.35); }
+.gift-option:hover .gift-action::before    { width: 300px; height: 300px; }
+
+/* ---- Gift Modal (Pix) ---- */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 998;
+}
+
+.modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 40, 50, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+.modal-card {
+    position: relative;
+    background: white;
+    border-radius: 24px;
+    padding: 3rem;
+    width: min(520px, 90vw);
+    box-shadow:
+        0 40px 100px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(31, 95, 134, 0.1);
+    z-index: 1;
+    animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    border: none;
+    background: rgba(31, 95, 134, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #1f5f86;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.modal-close:hover { background: rgba(31, 95, 134, 0.15); transform: rotate(90deg); }
+
+.modal-step { display: none; }
+
+.modal-step.is-active {
+    display: block;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal-step h3 {
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.modal-value {
+    margin: 0.5rem 0 2rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.modal-value strong {
+    background: linear-gradient(90deg, #d4af6a 0%, #c5a059 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gift-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.gift-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-weight: 600;
+    color: #445566;
+    font-size: 0.95rem;
+}
+
+.gift-form input,
+.gift-form textarea {
+    border-radius: 12px;
+    border: 2px solid #e8ecf0;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: none;
+    background: #fafbfc;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gift-form input:focus,
+.gift-form textarea:focus {
+    outline: none;
+    border-color: #1f5f86;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(31, 95, 134, 0.08);
+}
+
+.gift-form button {
+    margin-top: 1rem;
+    border: none;
+    border-radius: 12px;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(31, 95, 134, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gift-form button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(31, 95, 134, 0.4); }
+.gift-form button:disabled             { opacity: 0.7; cursor: not-allowed; }
+
+.qr-placeholder {
+    height: 240px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e9eff5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #497996;
+    margin: 1.5rem 0 1rem;
+    box-shadow: inset 0 2px 10px rgba(31, 95, 134, 0.08);
+}
+
+.qr-placeholder img { max-width: 100%; max-height: 100%; }
+
+.thanks-text {
+    font-weight: 600;
+    background: linear-gradient(90deg, #1f5f86 0%, #2a7ba8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+}

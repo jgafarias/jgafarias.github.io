@@ -1,0 +1,43 @@
+/* ========================================
+   LOADING SCREEN
+   ======================================== */
+
+#loading {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fb 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeOut 1s ease forwards;
+    animation-delay: 2.5s;
+}
+
+.iniciais {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 120px;
+    color: #7fb8d6;
+    opacity: 0.95;
+    text-align: center;
+    letter-spacing: -30px;
+    animation: pulse 2s ease infinite;
+}
+
+.iniciais .l {
+    margin-right: -30px;
+}
+
+.iniciais .r {
+    position: relative;
+    top: 50px;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50%       { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}

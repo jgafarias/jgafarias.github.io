@@ -1,0 +1,253 @@
+/* ========================================
+   RSVP MODAL — Confirmação de Presença
+   ======================================== */
+
+#rsvpModal .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 35, 50, 0.72);
+    backdrop-filter: blur(8px);
+}
+
+.rsvp-modal-card {
+    position: relative;
+    z-index: 1;
+    background: white;
+    border-radius: 28px;
+    width: min(500px, 92vw);
+    overflow: hidden;
+    box-shadow:
+        0 40px 100px rgba(0, 0, 0, 0.28),
+        0 0 0 1px rgba(31, 95, 134, 0.1);
+    animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rsvp-modal-header {
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    padding: 2.2rem 2.5rem 3rem;
+    text-align: center;
+    position: relative;
+}
+
+.rsvp-modal-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: white;
+    clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+.rsvp-modal-icon {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 0.75rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+.rsvp-modal-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: white;
+    -webkit-text-fill-color: white;
+    background: none;
+    margin-bottom: 0.4rem;
+}
+
+.rsvp-modal-header p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-style: italic;
+}
+
+.rsvp-modal-step {
+    padding: 2rem 2.5rem 2.5rem;
+}
+
+.rsvp-modal-step.rsvp-success {
+    display: none;
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.rsvp-modal-step.rsvp-success.is-visible {
+    display: block;
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Campos do formulário */
+.rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.rsvp-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: #445566;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-family: 'Lato', sans-serif;
+}
+
+.rsvp-form input[type="text"] {
+    border-radius: 12px;
+    border: 2px solid #e8ecf0;
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
+    font-family: inherit;
+    background: #fafbfc;
+    color: #2c3e50;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rsvp-form input[type="text"]:focus {
+    outline: none;
+    border-color: #1f5f86;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(31, 95, 134, 0.08);
+}
+
+/* Contador de convidados */
+.guest-counter {
+    display: flex;
+    align-items: center;
+    background: #fafbfc;
+    border: 2px solid #e8ecf0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.guest-counter:focus-within {
+    border-color: #1f5f86;
+    box-shadow: 0 0 0 4px rgba(31, 95, 134, 0.08);
+}
+
+.counter-btn {
+    width: 48px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #1f5f86;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter-btn:hover  { background: rgba(31, 95, 134, 0.08); }
+.counter-btn:active { background: rgba(31, 95, 134, 0.15); transform: scale(0.92); }
+
+.guest-counter input[type="number"] {
+    flex: 1;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1f5f86;
+    font-family: 'Playfair Display', serif;
+    padding: 0;
+    -moz-appearance: textfield;
+}
+
+.guest-counter input[type="number"]::-webkit-outer-spin-button,
+.guest-counter input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.counter-hint {
+    font-size: 0.78rem;
+    color: #889bad;
+    text-transform: none;
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-top: 0.25rem;
+}
+
+/* Botão enviar */
+.rsvp-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 1.1rem 2rem;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(31, 95, 134, 0.28);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.rsvp-submit::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.rsvp-submit:hover:not(:disabled)::before { width: 500px; height: 500px; }
+.rsvp-submit:hover:not(:disabled)         { transform: translateY(-2px); box-shadow: 0 12px 38px rgba(31, 95, 134, 0.4); }
+.rsvp-submit:disabled                     { opacity: 0.65; cursor: not-allowed; }
+
+.btn-icon {
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+}
+
+.rsvp-submit:hover:not(:disabled) .btn-icon { transform: translateX(5px); }
+
+/* Estado de sucesso */
+.success-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 1rem;
+    animation: bounceIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes bounceIn {
+    0%   { transform: scale(0); opacity: 0; }
+    60%  { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.rsvp-success h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.rsvp-success p {
+    color: #596a7d;
+    font-size: 1rem;
+}

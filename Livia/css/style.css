@@ -1,0 +1,27 @@
+/* ============================================================
+   FESTA DA LÍVIA — Master Stylesheet
+   Importe aqui todos os módulos CSS em ordem.
+   Para editar um componente, abra o arquivo correspondente:
+
+   base.css       → Reset e tipografia global
+   loading.css    → Tela de carregamento
+   header.css     → Cabeçalho e navegação
+   sections.css   → Layout de página e seções (SPA)
+   home.css       → Seção inicial
+   bio.css        → Momentos / Carousel
+   event.css      → Evento e cards de detalhes
+   rsvp.css       → Modal de confirmação de presença
+   gifts.css      → Presentes e modal Pix
+   responsive.css → Media queries (mobile/tablet)
+   ============================================================ */
+
+@import './base.css';
+@import './loading.css';
+@import './header.css';
+@import './sections.css';
+@import './home.css';
+@import './bio.css';
+@import './event.css';
+@import './rsvp.css';
+@import './gifts.css';
+@import './responsive.css';

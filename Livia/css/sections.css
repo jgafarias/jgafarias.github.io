@@ -1,0 +1,59 @@
+/* ========================================
+   LAYOUT DE PÁGINA & SEÇÕES (SPA)
+   ======================================== */
+
+.page {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+    position: relative;
+    background: transparent;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 0 5%;
+}
+
+.content h1,
+.content h2,
+.content h3 { font-family: 'Playfair Display', serif; }
+
+.content p,
+.content span,
+.content button,
+.content a:not(.btn-text) { font-family: 'Lato', sans-serif; }
+
+/* SPA Section visibility */
+.section {
+    display: none;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.section.is-active {
+    display: flex;
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.section.home.is-active {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-content: center;
+}

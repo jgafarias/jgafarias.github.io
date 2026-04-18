@@ -1,0 +1,26 @@
+/* ========================================
+   BASE — Reset & Tipografia global
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(135deg, #f8f9fb 0%, #fafbfc 100%);
+    color: #2c3e50;
+    font-family: 'Lato', sans-serif;
+    display: block;
+    overflow: hidden;
+}

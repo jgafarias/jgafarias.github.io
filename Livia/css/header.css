@@ -1,0 +1,120 @@
+/* ========================================
+   HEADER & NAVIGATION
+   ======================================== */
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 5%;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(31, 95, 134, 0.08);
+    z-index: 1000;
+    font-family: sans-serif;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.site-logo {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 60px;
+    color: #117fbb;
+    letter-spacing: -15px;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.site-logo .l { margin-right: -15px; }
+.site-logo .r { position: relative; top: 15px; }
+
+.brand-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-size: 1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1f5f86 0%, #2a7ba8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-family: sans-serif;
+}
+
+.brand-subtitle {
+    font-size: 0.8rem;
+    color: #5a8aa6;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-family: sans-serif;
+}
+
+/* Navigation */
+.site-nav {
+    display: flex;
+    gap: 1.8rem;
+    font-weight: 600;
+    font-family: sans-serif !important;
+}
+
+.site-nav a {
+    text-decoration: none;
+    color: #1f5f86;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: sans-serif;
+    position: relative;
+}
+
+.site-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #1f5f86 0%, #2a7ba8 100%);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-nav a:hover::after,
+.site-nav a.is-active::after { width: 100%; }
+
+.site-nav a:hover,
+.site-nav a.is-active { color: #0f6a9d; }
+
+.nav-toggle {
+    display: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 2px;
+    background: linear-gradient(90deg, #1f5f86 0%, #2a7ba8 100%);
+    transition: all 0.3s;
+}

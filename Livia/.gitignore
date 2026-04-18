@@ -1,0 +1,31 @@
+# ============================================================
+#  .gitignore — Festa da Lívia
+# ============================================================
+
+# ⚠️  CREDENCIAIS SENSÍVEIS — nunca enviar para o GitHub
+js/config.js
+
+# ============================================================
+#  IMAGENS PRIVADAS
+#
+#  ⚠️  ATENÇÃO: se você descomentar a linha abaixo,
+#  as imagens NÃO subirão para o GitHub e o site ficará
+#  sem fotos no GitHub Pages.
+#
+#  Opções para proteger as imagens:
+#  1. Deixe o repositório como PRIVADO no GitHub
+#     (Settings → Danger Zone → Change visibility)
+#  2. Use Cloudinary ou Google Drive como CDN privado
+#
+# img/
+# ============================================================
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.sublime-workspace
